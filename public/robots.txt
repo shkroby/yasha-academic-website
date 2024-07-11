@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://jacobshkrob.com/hugo-website/sitemap.xml
