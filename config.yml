@@ -1,4 +1,4 @@
-baseURL: "https://jacobshkrob.com/hugo-website/" 
+baseURL: "https://jacobshkrob.netlify.app" 
 title: Moritz-Maria von Igelfeld
 paginate: 20
 theme: PaperMod
