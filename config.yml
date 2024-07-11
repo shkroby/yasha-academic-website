@@ -54,10 +54,10 @@ params:
     profileMode:
           enabled: true
           title: Jacob Shkrob
-          subtitle: "Hello/Bonjour/Привет! I am a 3rd year PhD student at [**NYU Courant**](https://math.nyu.edu/dynamic/) studying high-dimensional probability theory, statistics, and optimal transport. I am supervised by [**Professor Jonathan Niles-Weed**](https://www.jonathannilesweed.com/). Before coming to NYU, I completed my undergraduate studies at McGill University under the supervision of [**Jessica Lin**.](https://sites.google.com/view/jessicalin-math/home)"
+          subtitle: "Hello/Bonjour/Привет! I am a 3rd year PhD student at [**NYU Courant**](https://math.nyu.edu/dynamic/) studying high-dimensional probability theory, statistics, and optimal transport. I am supervised by [**Professor Jonathan Niles-Weed**.](https://www.jonathannilesweed.com/) Before coming to NYU, I completed my undergraduate studies at McGill University under the supervision of [**Jessica Lin**.](https://sites.google.com/view/jessicalin-math/home)"
           imageUrl: "id.jpg"
-          imageWidth: 160
-          imageHeight: 160
+          imageWidth: 280
+          imageHeight: 280
           imageTitle: Looking into who?
           buttons:
             - name: Papers
@@ -65,43 +65,28 @@ params:
             - name: Teaching
               url: courses/
             - name: Blog
-              url: https://en.wikipedia.org/wiki/Moritz-Maria_von_Igelfeld_(character)
+              url: blog/
             - name: Books
               url: books/
-            - name: Tags
-              url: tags/
-            - name: Archive
-              url: archive/
+          # - name: Tags
+          #    url: tags/
+          #  - name: Archive
+          #    url: archive/
             
     socialIcons:
         - name: CV
           url: cv.pdf
         - name: Email
-          url: mailto:moritz.maria.von.igelfeld@gmail.com
-        - name: Zoom
-          url: https://www.zoom.us/my/igelfeld
-        - name: Location
-          url: location/
-        - name: Office Hours
-          url: officehours/
-        - name: Google Scholar
-          url: https://scholar.google.com/citations?user=cL23w-4AAAAJ
+          url: jas10184@nyu.edu
         - name: GitHub
-          url: https://github.com/pmichaillat
-        - name: Substack
-          url: https://pmichaillat.substack.com
-        - name: YouTube
-          url: https://www.youtube.com/@alexandermccallsmithoffici9000
-        - name: Twitter
-          url: https://twitter.com/McCallSmith
-
+          url: https://github.com/jshkrob
     assets:
         disableScrollBarStyle: true
     cover:
         hiddenInList: false
         hiddenInSingle: true
     label:
-      text: "Moritz-Maria von Igelfeld"
+      text: "Jacob Shkrob"
       icon: favicon.ico
       iconHeight: 18
 

@@ -6,7 +6,7 @@
     --header-height: 44px;
     --footer-height: 70px;
     --radius: 8px;
-    --theme: rgb(255, 255, 255);
+    --theme: rgb(212, 181, 181);
     --entry: rgb(255, 255, 255);
     --primary: rgb(30, 30, 30);
     --secondary: rgb(108, 108, 108);
@@ -20,7 +20,7 @@
     --midpurple:#c0b5e5;
     --lightpurple: #e5e1f4;
     --semibold: 500;
-    --homesize: 16px;
+    --homesize: 20px;
     --textsize: 18px;
     --h1size: 25px;
     --entrysize: 15px;
