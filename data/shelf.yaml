@@ -1,0 +1,32 @@
+# ---------------------------------------------------------------------------
+# Favorite things, shown on the Shelf page (/shelf/).
+#
+# Each section becomes a heading on the page, in the order listed here.
+# Rename, reorder, or add sections freely (e.g. "Music", "Films"); a section
+# with no items is hidden. Every field except `quote` / `title` is optional,
+# and Markdown (*italics*, [links](https://...)) works in all of them.
+#
+# A quote:
+#   - quote: "The quotation itself."
+#     by: Who said it
+#     source: Where it's from        (shown in italics)
+#
+# Anything else (a book, website, person, ...):
+#   - title: The Brothers Karamazov
+#     by: Fyodor Dostoevsky         (author, maker, affiliation, ...)
+#     url: https://...              (makes the title a link)
+#     note: A sentence on why it's here.
+# ---------------------------------------------------------------------------
+
+sections:
+  - title: Quotes
+    items: []
+
+  - title: Books
+    items: []
+
+  - title: Websites
+    items: []
+
+  - title: People
+    items: []

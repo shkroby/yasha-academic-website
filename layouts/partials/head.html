@@ -16,7 +16,7 @@
 <link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
 {{- $css := resources.Get "css/main.css" }}
 {{- $isBlog := eq .Section "blog" }}
-{{- if $isBlog }}
+{{- if or $isBlog (eq .Section "shelf") }}
   {{- $css = slice $css (resources.Get "css/tufte.css") (resources.Get "css/syntax.css") | resources.Concat "css/blog.css" }}
 {{- end }}
 {{- $css = $css | minify | fingerprint }}

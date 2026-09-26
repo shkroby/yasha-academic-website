@@ -1,0 +1,49 @@
+{{ define "bodyclass" }}tufte-page{{ end }}
+
+{{ define "main" }}
+{{- $page := . }}
+{{- $sections := slice }}
+{{- range hugo.Data.shelf.sections }}
+  {{- if .items }}{{ $sections = $sections | append . }}{{ end }}
+{{- end }}
+<article class="tufte shelf">
+  <h1 class="blog-title"><span class="marker">{{ .Title }}</span></h1>
+  {{- with .Description }}<p class="subtitle">{{ . }}</p>{{ end }}
+  {{- with .Content }}<section>{{ . }}</section>{{ end }}
+
+  {{- if gt (len $sections) 1 }}
+  <nav class="shelf-jump" aria-label="Shelf sections">
+    {{- range $sections }}<a href="#{{ .title | anchorize }}">{{ .title }}</a>{{ end -}}
+  </nav>
+  {{- end }}
+
+  {{- range $sections }}
+  <section class="shelf-section" id="{{ .title | anchorize }}">
+    <h2>{{ .title }}</h2>
+    {{- range .items }}
+      {{- if .quote }}
+    <blockquote class="shelf-quote">
+      {{ $page.RenderString (dict "display" "block") .quote }}
+      {{- if or .by .source }}
+      <footer>{{ with .by }}{{ . | markdownify }}{{ end }}{{ if and .by .source }}, {{ end }}{{ with .source }}<cite>{{ . | markdownify }}</cite>{{ end }}</footer>
+      {{- end }}
+    </blockquote>
+      {{- else }}
+    <div class="shelf-item">
+      {{- $title := .title | markdownify }}
+      <p class="shelf-title">
+        {{- with .url }}<a href="{{ . }}">{{ $title }}</a>{{ else }}{{ $title }}{{ end -}}
+        {{- with .by }}<span class="shelf-by"> — {{ . | markdownify }}</span>{{ end -}}
+      </p>
+      {{- with .note }}<p class="shelf-note">{{ . | markdownify }}</p>{{ end }}
+    </div>
+      {{- end }}
+    {{- end }}
+  </section>
+  {{- else }}
+  <section>
+    <p>Nothing on the shelf yet.</p>
+  </section>
+  {{- end }}
+</article>
+{{ end }}

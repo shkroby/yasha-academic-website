@@ -7,7 +7,8 @@
       <a href="{{ $anchor }}#research" data-section="research">Research</a>
       <a href="{{ $anchor }}#writings" data-section="writings">Writings</a>
       <a href="{{ $anchor }}#about" data-section="about">About &amp; Contact</a>
-      <a class="nav-blog{{ if eq .Section "blog" }} is-current{{ end }}" href="{{ "blog/" | relURL }}"{{ if eq .Section "blog" }} aria-current="page"{{ end }}><span>Blog</span></a>
+      <a class="nav-marker{{ if eq .Section "blog" }} is-current{{ end }}" href="{{ "blog/" | relURL }}"{{ if eq .Section "blog" }} aria-current="page"{{ end }}><span>Blog</span></a>
+      <a class="nav-marker{{ if eq .Section "shelf" }} is-current{{ end }}" href="{{ "shelf/" | relURL }}"{{ if eq .Section "shelf" }} aria-current="page"{{ end }}><span>Shelf</span></a>
       <a href="{{ site.Params.cv | relURL }}">CV<span class="ext" aria-hidden="true">↗</span></a>
     </nav>
   </div>

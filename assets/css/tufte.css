@@ -1,7 +1,7 @@
 /* ==========================================================================
    Blog styles, adapted from Tufte CSS (MIT, Dave Liepmann,
    https://github.com/edwardtufte/tufte-css) with ET Book (MIT).
-   Loaded only on /blog/ pages.
+   Loaded only on /blog/ and /shelf/ pages.
    ========================================================================== */
 
 @font-face {
@@ -306,6 +306,39 @@ html { font-size: 15px; }
 .tufte .post-summary { margin: 0; font-size: 1.3rem; line-height: 1.8rem; }
 .tufte .rss-link { font-size: 1.15rem; color: var(--muted); }
 
+/* ---- Shelf ------------------------------------------------------------ */
+
+.tufte .shelf-jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.6rem;
+  font-size: 1.15rem;
+  line-height: 1.4;
+  margin: 1.8rem 0 0;
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+}
+.tufte .shelf-section h2 { margin-bottom: 1rem; }
+.tufte section > blockquote.shelf-quote {
+  border-left-color: var(--marker);
+  margin: 1.4rem 0 1.8rem;
+}
+.tufte .shelf-quote p { font-style: italic; margin: 0 0 0.6rem; }
+.tufte .shelf-quote footer { color: var(--muted); }
+.tufte .shelf-quote cite { font-style: italic; }
+.tufte .shelf-item {
+  width: 55%;
+  padding: 1rem 0 1.1rem;
+  border-top: 1px solid var(--rule);
+}
+.tufte .shelf-item:last-child { border-bottom: 1px solid var(--rule); }
+.tufte .shelf-title { margin: 0; font-size: 1.6rem; line-height: 1.3; }
+.tufte .shelf-title a { color: var(--ink); text-decoration-color: var(--marker); text-decoration-thickness: 3px; text-underline-offset: 4px; }
+.tufte .shelf-title a:hover { color: var(--accent); text-decoration-color: currentColor; }
+.tufte .shelf-by { color: var(--muted); font-size: 1.3rem; }
+.tufte .shelf-note { margin: 0.35rem 0 0; font-size: 1.3rem; line-height: 1.8rem; }
+
 /* ---- Single post ------------------------------------------------------ */
 
 .tufte .post-back {
@@ -347,6 +380,7 @@ html { font-size: 15px; }
   .tufte section > pre,
   .tufte section > blockquote,
   .tufte .post-item,
+  .tufte .shelf-item,
   .tufte blockquote p,
   .tufte blockquote footer { width: 100%; }
   .tufte section > dl,

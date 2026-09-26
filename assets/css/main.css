@@ -11,7 +11,7 @@
   --accent: #a4470d;       /* persimmon links, 5.4:1 on paper */
   --accent-soft: rgba(164, 71, 13, 0.32);
   --rule: #ecdac7;         /* hairlines */
-  --marker: #f7c28a;       /* highlighter, used only for the Blog */
+  --marker: #f7c28a;       /* highlighter, used only for the Blog and Shelf */
   --serif: Georgia, "Times New Roman", "Noto Serif", serif;
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --wrap: 920px;
@@ -133,14 +133,15 @@ summary:focus-visible {
 .site-nav a[data-section].is-active::after,
 .site-nav a[data-section]:hover::after { transform: scaleX(1); }
 
-/* The Blog tab: a hand-drawn highlighter swipe that sweeps in once. */
-.site-nav .nav-blog {
+/* The Blog and Shelf tabs: hand-drawn highlighter swipes that sweep in once,
+   one after the other. */
+.site-nav .nav-marker {
   color: var(--ink);
   font-weight: 600;
   padding: 2px 8px;
   isolation: isolate;
 }
-.site-nav .nav-blog::before,
+.site-nav .nav-marker::before,
 .marker::before {
   content: "";
   position: absolute;
@@ -149,7 +150,7 @@ summary:focus-visible {
   transform-origin: left center;
   animation: marker-swipe 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.35s both;
 }
-.site-nav .nav-blog::before {
+.site-nav .nav-marker::before {
   left: -3px;
   right: -5px;
   top: 11px;
@@ -158,8 +159,12 @@ summary:focus-visible {
   transform: rotate(-3deg) skewX(-12deg);
   transition: transform 0.25s ease, background-color 0.25s ease, top 0.25s ease;
 }
-.site-nav .nav-blog:hover::before,
-.site-nav .nav-blog.is-current::before {
+.site-nav .nav-marker + .nav-marker::before {
+  border-radius: 8px 3px 7px 2px / 3px 7px 3px 6px;
+  animation-delay: 0.6s;
+}
+.site-nav .nav-marker:hover::before,
+.site-nav .nav-marker.is-current::before {
   top: 6px;
   transform: rotate(-2deg) skewX(-12deg);
   background: #f4ae68;
@@ -415,13 +420,12 @@ mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; padding: 2
     padding-bottom: 8px;
   }
   .site-nav {
-    gap: 16px;
-    overflow-x: auto;
+    flex-wrap: wrap;
+    gap: 0 16px;
     max-width: 100%;
     padding: 4px 0 2px;
-    scrollbar-width: none;
   }
-  html { scroll-padding-top: 110px; }
+  html { scroll-padding-top: 144px; }
 
   .hero {
     grid-template-columns: 1fr;

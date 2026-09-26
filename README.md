@@ -13,6 +13,7 @@ publishes the site through GitHub Actions (`.github/workflows/hugo.yml`).
 | Name, email, links, research interests, education, address | `hugo.yaml` (under `params`) |
 | Papers and working papers | `data/papers.yaml` |
 | Writings (expository notes, etc.) | `data/writings.yaml`, PDFs in `static/writings/` |
+| Shelf (favorite quotes, books, websites, people) | `data/shelf.yaml` (page subtitle: `content/shelf/_index.md`) |
 | CV | replace `static/cv.pdf` |
 | Profile photos (one is picked at random per visit) | `static/images/`, listed in `hugo.yaml` under `portraits` |
 | Colors and layout | `assets/css/main.css` (blog: `assets/css/tufte.css`) |
