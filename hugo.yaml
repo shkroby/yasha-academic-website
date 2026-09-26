@@ -19,17 +19,15 @@ params:
   cv: cv.pdf              # file lives in static/cv.pdf
   github: https://github.com/jshkrob
 
-  # One of these is chosen uniformly at random (probability 1/4 each)
+  # One of these is chosen uniformly at random (probability 1/3 each)
   # every time the home page loads. Add or remove entries freely.
   portraits:
     - src: images/portrait-1.jpg
       alt: Jacob Shkrob smiling, chin resting on his hand
-    - src: images/portrait-2.jpg
-      alt: Jacob Shkrob crouching next to a row of paperback books, pointing at them
     - src: images/portrait-3.jpg
       alt: Jacob Shkrob appearing to hold up a giant rusted steel sculpture
-    - src: images/portrait-4.jpg
-      alt: Jacob Shkrob looking up at the sky
+    - src: images/portrait-5.jpg
+      alt: Jacob Shkrob smiling in front of a brick wall
 
   interests:
     - title: High-dimensional probability
