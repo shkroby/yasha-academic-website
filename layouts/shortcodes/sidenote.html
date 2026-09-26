@@ -1,0 +1,4 @@
+{{- /* Numbered Tufte sidenote. Usage: text{{< sidenote >}}Note with $math$.{{< /sidenote >}} */ -}}
+{{- $id := printf "sn-%s" (substr (sha1 (printf "%v|%s" .Position .Inner)) 0 10) -}}
+<label for="{{ $id }}" class="margin-toggle sidenote-number"></label><input type="checkbox" id="{{ $id }}" class="margin-toggle"><span class="sidenote">{{ .Inner | .Page.RenderString }}</span>
+{{- /**/ -}}

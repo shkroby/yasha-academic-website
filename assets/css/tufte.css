@@ -1,0 +1,379 @@
+/* ==========================================================================
+   Blog styles, adapted from Tufte CSS (MIT, Dave Liepmann,
+   https://github.com/edwardtufte/tufte-css) with ET Book (MIT).
+   Loaded only on /blog/ pages.
+   ========================================================================== */
+
+@font-face {
+  font-family: "et-book";
+  src: url("../fonts/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "et-book";
+  src: url("../fonts/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "et-book";
+  src: url("../fonts/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "et-book-roman-old-style";
+  src: url("../fonts/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Tufte sizes everything in rem against a 15px root. The rest of the site
+   uses px, so changing the root size here only affects blog content. */
+html { font-size: 15px; }
+
+/* The text column starts where the header's name starts, so the blog lines
+   up with the rest of the site; the right-hand ~40% is the margin. */
+.tufte {
+  --tufte-left: max(24px, calc((100% - var(--wrap)) / 2 + 24px));
+  box-sizing: content-box;
+  width: min(calc(100% - var(--tufte-left) - 24px), 1100px);
+  margin: 0;
+  padding: 1rem 0 4rem var(--tufte-left);
+  font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+  color: var(--ink);
+  line-height: 1;
+  counter-reset: sidenote-counter;
+}
+
+.tufte h1 {
+  font-weight: 400;
+  margin-top: 3.2rem;
+  margin-bottom: 1.5rem;
+  font-size: 3.2rem;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  max-width: 55%;
+}
+.tufte h2 {
+  font-style: italic;
+  font-weight: 400;
+  margin-top: 2.6rem;
+  margin-bottom: 0;
+  font-size: 2.2rem;
+  line-height: 1.1;
+}
+.tufte h3 {
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.7rem;
+  margin-top: 2rem;
+  margin-bottom: 0;
+  line-height: 1.1;
+}
+
+.tufte p.subtitle {
+  font-style: italic;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  line-height: 1.2;
+  color: var(--muted);
+  max-width: 55%;
+}
+
+.tufte hr {
+  display: block;
+  height: 1px;
+  width: 55%;
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 1em 0;
+  padding: 0;
+}
+
+.tufte section { padding-top: 1rem; padding-bottom: 1rem; }
+
+.tufte p,
+.tufte dl,
+.tufte ol,
+.tufte ul {
+  font-size: 1.4rem;
+  line-height: 2rem;
+}
+.tufte p {
+  margin-top: 1.4rem;
+  margin-bottom: 1.4rem;
+  padding-right: 0;
+  vertical-align: baseline;
+}
+
+.tufte section > p,
+.tufte section > footer,
+.tufte section > table,
+.tufte section > .math-block,
+.tufte section > .highlight,
+.tufte section > pre {
+  width: 55%;
+}
+.tufte section > dl,
+.tufte section > ol,
+.tufte section > ul {
+  width: 50%;
+  padding-left: 5%;
+}
+.tufte li:not(:first-child) { margin-top: 0.25rem; }
+
+.tufte a { color: var(--accent); }
+
+.tufte strong, .tufte b { font-weight: bold; }
+
+/* Epigraphs and quotations */
+.tufte blockquote { font-size: 1.4rem; margin: 0 0 0 0; }
+.tufte blockquote p { width: 55%; margin-right: 40px; }
+.tufte blockquote footer {
+  width: 55%;
+  font-size: 1.1rem;
+  text-align: right;
+}
+.tufte section > blockquote {
+  padding-left: 2.5%;
+  border-left: 2px solid var(--rule);
+  width: 52.5%;
+}
+.tufte section > blockquote p,
+.tufte section > blockquote footer { width: auto; }
+.tufte div.epigraph { margin: 3em 0; }
+.tufte div.epigraph > blockquote { margin: 0; }
+.tufte div.epigraph > blockquote,
+.tufte div.epigraph > blockquote > p { font-style: italic; }
+.tufte div.epigraph > blockquote > footer { font-style: normal; color: var(--muted); }
+.tufte div.epigraph > blockquote > footer > cite { font-style: italic; }
+
+/* Sidenotes, margin notes, figures */
+.tufte .sidenote,
+.tufte .marginnote {
+  float: right;
+  clear: right;
+  margin-right: -60%;
+  width: 50%;
+  margin-top: 0.3rem;
+  margin-bottom: 0;
+  font-size: 1.1rem;
+  line-height: 1.35;
+  vertical-align: baseline;
+  position: relative;
+  color: var(--ink);
+}
+.tufte blockquote .sidenote,
+.tufte blockquote .marginnote {
+  margin-right: -82%;
+  min-width: 59%;
+  text-align: left;
+}
+.tufte .sidenote-number { counter-increment: sidenote-counter; }
+.tufte .sidenote-number::after,
+.tufte .sidenote::before {
+  font-family: et-book-roman-old-style, et-book, Georgia, serif;
+  position: relative;
+  vertical-align: baseline;
+  color: var(--accent);
+}
+.tufte .sidenote-number::after {
+  content: counter(sidenote-counter);
+  font-size: 1rem;
+  top: -0.5rem;
+  left: 0.1rem;
+}
+.tufte .sidenote::before {
+  content: counter(sidenote-counter) " ";
+  font-size: 1rem;
+  top: -0.5rem;
+}
+.tufte .marginnote img { margin-bottom: 0.4rem; }
+
+.tufte input.margin-toggle { display: none; }
+.tufte label.sidenote-number { display: inline-block; max-height: 2rem; }
+.tufte label.margin-toggle:not(.sidenote-number) { display: none; }
+
+.tufte figure {
+  padding: 0;
+  border: 0;
+  font: inherit;
+  max-width: 55%;
+  margin: 0 0 3em 0;
+}
+.tufte figure img { width: 100%; }
+.tufte figcaption {
+  float: right;
+  clear: right;
+  margin-top: 0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 40%;
+}
+.tufte figure.fullwidth { max-width: 90%; }
+.tufte figure.fullwidth figcaption { margin-right: 24%; }
+
+.tufte span.newthought {
+  font-variant: small-caps;
+  font-size: 1.2em;
+  letter-spacing: 0.03em;
+}
+
+/* Tables (booktabs style) */
+.tufte table {
+  border-collapse: collapse;
+  font-size: 1.2rem;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  margin: 1.4rem 0;
+}
+.tufte th { font-weight: normal; border-bottom: 1px solid var(--ink); text-align: left; }
+.tufte th, .tufte td { padding: 0.35rem 1rem 0.35rem 0; }
+
+/* Code */
+.tufte code,
+.tufte pre > code {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.88em;
+  line-height: 1.45;
+}
+.tufte p code { background: rgba(236, 218, 199, 0.55); padding: 0.05em 0.3em; border-radius: 3px; }
+.tufte .highlight pre,
+.tufte section > pre {
+  font-size: 1.1rem;
+  overflow-x: auto;
+  padding: 0.9rem 1.1rem;
+  background: #f9ebdc;
+  border-radius: 4px;
+  margin: 1.4rem 0;
+}
+
+/* Math */
+.tufte .math-block {
+  font-size: 1.4rem;
+  margin: 1.4rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* ---- Blog index ------------------------------------------------------- */
+
+.tufte .blog-title { margin-bottom: 0.6rem; }
+.marker {
+  position: relative;
+  isolation: isolate;
+  padding: 0 0.18em;
+}
+.marker::before {
+  left: -0.08em;
+  right: -0.14em;
+  top: 0.5em;
+  bottom: 0.06em;
+  border-radius: 0.05em 0.2em 0.08em 0.25em / 0.15em 0.08em 0.2em 0.06em;
+  transform: rotate(-3deg) skewX(-12deg);
+}
+
+.tufte .post-item {
+  width: 55%;
+  padding: 1.5rem 0 1.7rem;
+  border-top: 1px solid var(--rule);
+}
+.tufte .post-item:last-of-type { border-bottom: 1px solid var(--rule); }
+.tufte .post-date {
+  font-size: 1.15rem;
+  line-height: 1.4;
+  color: var(--muted);
+  margin: 0 0 0.4rem;
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+}
+.tufte .post-link {
+  font-style: normal;
+  font-size: 2rem;
+  line-height: 1.15;
+  margin: 0 0 0.6rem;
+}
+.tufte .post-link a { color: var(--ink); text-decoration-color: var(--marker); text-decoration-thickness: 3px; text-underline-offset: 4px; }
+.tufte .post-link a:hover { color: var(--accent); text-decoration-color: currentColor; }
+.tufte .post-summary { margin: 0; font-size: 1.3rem; line-height: 1.8rem; }
+.tufte .rss-link { font-size: 1.15rem; color: var(--muted); }
+
+/* ---- Single post ------------------------------------------------------ */
+
+.tufte .post-back {
+  font-size: 1.15rem;
+  margin: 2rem 0 0;
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+}
+.tufte .post-back a::before { content: "← "; }
+.tufte.post h1 { margin-top: 1.2rem; }
+.tufte.post > .post-date { margin-top: 0.4rem; }
+.tufte .post-footer p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  font-size: 1.15rem;
+  border-top: 1px solid var(--rule);
+  padding-top: 1.4rem;
+}
+
+/* ---- Small screens: notes collapse behind a toggle ------------------- */
+
+@media (max-width: 760px) {
+  .tufte {
+    width: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .tufte h1,
+  .tufte p.subtitle { max-width: none; }
+  .tufte h1 { font-size: 2.6rem; }
+  .tufte hr,
+  .tufte section > p,
+  .tufte section > footer,
+  .tufte section > table,
+  .tufte section > .math-block,
+  .tufte section > .highlight,
+  .tufte section > pre,
+  .tufte section > blockquote,
+  .tufte .post-item,
+  .tufte blockquote p,
+  .tufte blockquote footer { width: 100%; }
+  .tufte section > dl,
+  .tufte section > ol,
+  .tufte section > ul { width: 90%; }
+  .tufte figure { max-width: 90%; }
+  .tufte figcaption,
+  .tufte figure.fullwidth figcaption { margin-right: 0; max-width: none; }
+  .tufte label.margin-toggle:not(.sidenote-number) {
+    display: inline;
+    color: var(--accent);
+    cursor: pointer;
+  }
+  .tufte label.sidenote-number { cursor: pointer; }
+  .tufte .sidenote,
+  .tufte .marginnote { display: none; }
+  .tufte .margin-toggle:checked + .sidenote,
+  .tufte .margin-toggle:checked + .marginnote {
+    display: block;
+    float: left;
+    left: 1rem;
+    clear: both;
+    width: 95%;
+    margin: 1rem 2.5%;
+    position: relative;
+  }
+}
+
+/* MathJax adds 1em above and below display math; the block already has margins. */
+.tufte .math-block mjx-container[jax="CHTML"][display="true"] { margin: 0.3em 0; }

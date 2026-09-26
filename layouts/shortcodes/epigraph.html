@@ -1,0 +1,9 @@
+{{- /* Usage: {{< epigraph author="Pierre de Fermat" source="Arithmetica, margin" >}}Quote{{< /epigraph >}} */ -}}
+<div class="epigraph">
+  <blockquote>
+    <p>{{ .Inner | .Page.RenderString }}</p>
+    {{- with .Get "author" }}
+    <footer>{{ . }}{{ with $.Get "source" }}, <cite>{{ . }}</cite>{{ end }}</footer>
+    {{- end }}
+  </blockquote>
+</div>

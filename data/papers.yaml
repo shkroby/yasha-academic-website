@@ -1,0 +1,107 @@
+# ---------------------------------------------------------------------------
+# Papers shown in the Research section of the home page.
+# Entries appear in the order written here (newest first).
+#
+# Fields (all optional except title):
+#   title, year, venue (italicised), note, arxiv (id only), pdf, url,
+#   coauthors (list of {name, url}), abstract (Markdown + LaTeX with $...$)
+# ---------------------------------------------------------------------------
+
+papers:
+  - title: Nearly sharp comparison results for sliced and max-sliced Wasserstein distances
+    year: 2026
+    arxiv: "2608.13374"
+    coauthors:
+      - name: Jonathan Niles-Weed
+        url: https://www.jonathannilesweed.com/
+    abstract: >-
+      We prove new comparison results between the Wasserstein distance and its
+      sliced and max-sliced counterparts. First, we show that the Hölder exponent
+      $\frac{2}{d+2}$ obtained by Bobkov and Götze for the max-sliced
+      1-Wasserstein distance on the unit ball is optimal for every $d \geq 2$,
+      settling a question raised in their work. Second, we show that sharper
+      comparisons are possible under stronger structural assumptions: if $\nu$
+      is a discrete measure and the optimal coupling between $\mu$ and $\nu$
+      transports each point to a nearest atom of $\nu$, then
+      $W_p(\mu, \nu) \leq C \sqrt{d}\, K \, \mathrm{SW}_{p,1}(\mu, \nu)$ for a
+      universal constant $C$, where the complexity parameter $K$ is always at
+      most the number of atoms $N$ and can be substantially smaller. This
+      complements a similar bound due to Park and Slepčev. An analogous bound
+      holds for the sliced Wasserstein distance based on $k$-dimensional
+      projections. Finally, using a construction from geometric discrepancy
+      theory due to Chen and Travaglini, we prove that the linear dependence on
+      $K$ in this bound cannot be improved, up to polylogarithmic factors.
+
+  - title: An empirical Bayes perspective on heteroskedastic mean estimation
+    year: 2026
+    arxiv: "2603.13499"
+    coauthors:
+      - name: Yanjun Han
+        url: https://yanjunhan2021.github.io/
+      - name: Abhishek Shetty
+    abstract: >-
+      Towards understanding the fundamental limits of estimation from data of
+      varied quality, we study the problem of estimating a mean parameter from
+      heteroskedastic Gaussian observations where the variances are unknown and
+      may vary arbitrarily across observations. While a simple linear estimator
+      with known variances attains the smallest mean squared error, estimation
+      without this knowledge is challenging due to the large number of nuisance
+      parameters. We propose a simple and principled approach based on empirical
+      Bayes: model the observations as if they were i.i.d. from a normal scale
+      mixture and compute the profile maximum likelihood estimator (MLE) for the
+      mean, treating the nonparametric mixing distribution as nuisance. Our
+      result shows that this estimator achieves near-optimal error bounds across
+      various heteroskedastic models in the literature. In particular, for the
+      subset-of-signals problem where an unknown subset of observations has
+      small variance, our estimator adaptively achieves the minimax rate for all
+      signal sizes, including the sharp phase transition, without any tuning
+      parameters. One of our key technical steps is a sharper metric entropy
+      bound for normal scale mixtures, obtained via Chebyshev approximations on a
+      transformed polynomial basis. This approach yields an improved
+      polylogarithmic, rather than polynomial, dependence on the variance ratio,
+      which could be of independent interest.
+
+  - title: Towards safe mechanical ventilation treatment using deep offline reinforcement learning
+    year: 2023
+    venue: Proceedings of the AAAI Conference on Artificial Intelligence
+    note: "vol. 37 (IAAI track)"
+    arxiv: "2210.02552"
+    coauthors:
+      - name: Flemming Kondrup
+      - name: Thomas Jiralerspong
+      - name: Elaine Lau
+      - name: Nathan de Lara
+      - name: My Duc Tran
+      - name: Doina Precup
+      - name: Sumana Basu
+    abstract: >-
+      Mechanical ventilation is a key form of life support for patients with
+      pulmonary impairment. Healthcare workers are required to continuously
+      adjust ventilator settings for each patient, a challenging and time
+      consuming task. Hence, it would be beneficial to develop an automated
+      decision support tool to optimize ventilation treatment. We present
+      DeepVent, a Conservative Q-Learning (CQL) based offline Deep
+      Reinforcement Learning (DRL) agent that learns to predict the optimal
+      ventilator parameters for a patient to promote 90 day survival. We design
+      a clinically relevant intermediate reward that encourages continuous
+      improvement of the patient vitals as well as addresses the challenge of
+      sparse reward in RL. We find that DeepVent recommends ventilation
+      parameters within safe ranges, as outlined in recent clinical trials. The
+      CQL algorithm offers additional safety by mitigating the overestimation of
+      the value estimates of out-of-distribution states/actions. We evaluate our
+      agent using Fitted Q Evaluation (FQE) and demonstrate that it outperforms
+      physicians from the MIMIC-III dataset.
+
+working:
+  - title: Vector balancing with permutations
+    note: In preparation.
+    coauthors:
+      - name: Jonathan Niles-Weed
+        url: https://www.jonathannilesweed.com/
+      - name: S. Sadovsky
+
+  - title: Bayes-optimal estimation for Gaussian planted matchings
+    note: In preparation.
+    coauthors:
+      - name: Jonathan Niles-Weed
+        url: https://www.jonathannilesweed.com/

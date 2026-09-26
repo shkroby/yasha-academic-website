@@ -1,0 +1,7 @@
+{{- /* Figure in the margin. Usage: {{< marginfigure src="plot.svg" alt="..." caption="..." >}}
+       src may be a file next to the post (page bundle) or a path under static/. */ -}}
+{{- $src := .Get "src" -}}
+{{- with .Page.Resources.Get $src }}{{ $src = .RelPermalink }}{{ else }}{{ $src = $src | relURL }}{{ end -}}
+{{- $id := printf "mf-%s" (substr (sha1 (printf "%v|%s" .Position $src)) 0 10) -}}
+<label for="{{ $id }}" class="margin-toggle" aria-label="Show figure">&#8853;</label><input type="checkbox" id="{{ $id }}" class="margin-toggle"><span class="marginnote"><img src="{{ $src }}" alt="{{ .Get "alt" }}">{{ with .Get "caption" }}{{ . | $.Page.RenderString }}{{ end }}</span>
+{{- /**/ -}}

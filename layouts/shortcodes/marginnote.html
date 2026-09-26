@@ -1,0 +1,4 @@
+{{- /* Unnumbered margin note. Usage: {{< marginnote >}}Aside.{{< /marginnote >}} */ -}}
+{{- $id := printf "mn-%s" (substr (sha1 (printf "%v|%s" .Position .Inner)) 0 10) -}}
+<label for="{{ $id }}" class="margin-toggle" aria-label="Show margin note">&#8853;</label><input type="checkbox" id="{{ $id }}" class="margin-toggle"><span class="marginnote">{{ .Inner | .Page.RenderString }}</span>
+{{- /**/ -}}

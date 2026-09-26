@@ -1,0 +1,16 @@
+{{- /*
+  Every $...$, $$...$$, \(...\) and \[...\] in Markdown arrives here untouched,
+  so underscores, asterisks and backslashes inside math are never mangled.
+  Top-level display environments (align, equation, gather, ...) are emitted
+  bare, because MathJax refuses to nest them inside \[ \].
+*/ -}}
+{{- $inner := trim .Inner " \n\t" -}}
+{{- if eq .Type "block" -}}
+  {{- if findRE `^\\begin\{(align|equation|gather|multline|alignat|flalign|eqnarray)\*?\}` $inner -}}
+<div class="math-block">{{ $inner }}</div>
+  {{- else -}}
+<div class="math-block">\[{{ $inner }}\]</div>
+  {{- end -}}
+{{- else -}}
+\({{ $inner }}\)
+{{- end -}}

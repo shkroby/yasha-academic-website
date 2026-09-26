@@ -1,0 +1,88 @@
+# ---------------------------------------------------------------------------
+# Site configuration for Jacob Shkrob's academic website.
+#
+# The GitHub Actions workflow overrides baseURL automatically with whatever
+# URL GitHub Pages assigns, so this value only matters for local previews.
+# ---------------------------------------------------------------------------
+baseURL: "https://shkroby.github.io/"
+locale: en-US
+title: Jacob Shkrob
+enableRobotsTXT: true
+disableKinds: [taxonomy, term]
+
+params:
+  description: >-
+    Jacob Shkrob is a PhD student in mathematics at NYU Courant working on
+    high-dimensional probability, combinatorics, and statistics.
+  altName: "Яша"          # shown in lighter type next to your name
+  email: jas10184@nyu.edu
+  cv: cv.pdf              # file lives in static/cv.pdf
+  github: https://github.com/jshkrob
+
+  # One of these is chosen uniformly at random (probability 1/4 each)
+  # every time the home page loads. Add or remove entries freely.
+  portraits:
+    - src: images/portrait-1.jpg
+      alt: Jacob Shkrob smiling, chin resting on his hand
+    - src: images/portrait-2.jpg
+      alt: Jacob Shkrob crouching next to a row of paperback books, pointing at them
+    - src: images/portrait-3.jpg
+      alt: Jacob Shkrob appearing to hold up a giant rusted steel sculpture
+    - src: images/portrait-4.jpg
+      alt: Jacob Shkrob looking up at the sky
+
+  interests:
+    - title: High-dimensional probability
+      detail: Optimal transport, convex analysis, statistical physics
+    - title: Statistics
+      detail: Robust statistics, empirical Bayes
+    - title: Combinatorics
+      detail: Matchings, permutations, discrepancy
+
+  education:
+    - degree: PhD in Mathematics
+      school: New York University
+      years: "2022–2027"
+    - degree: BSc in Honours Probability and Statistics
+      school: McGill University
+      years: "2018–2022"
+
+  address:
+    - Courant Institute of Mathematical Sciences
+    - New York University
+    - 251 Mercer Street
+    - New York, NY 10012
+
+  # MathJax is loaded from this CDN on the blog and on the home page.
+  mathjax: https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml-full.js
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      # Leaves LaTeX untouched so Markdown never mangles _, *, or \\.
+      passthrough:
+        enable: true
+        delimiters:
+          block:
+            - ['\[', '\]']
+            - ['$$', '$$']
+          inline:
+            - ['\(', '\)']
+            - ['$', '$']
+    parser:
+      attribute:
+        block: true
+  highlight:
+    noClasses: false
+    lineNos: false
+
+outputs:
+  home: [HTML]
+  section: [HTML, RSS]
+  page: [HTML]
+
+services:
+  rss:
+    limit: 20

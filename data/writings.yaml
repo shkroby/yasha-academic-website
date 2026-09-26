@@ -1,0 +1,16 @@
+# ---------------------------------------------------------------------------
+# Academic writing that isn't a paper: expository notes, theses, lecture
+# notes, surveys. Shown in the "Writings" section of the home page.
+#
+# Put PDFs in static/writings/ and link them as "writings/your-file.pdf".
+# Copy the commented example below, remove the leading "# ", and fill it in.
+# ---------------------------------------------------------------------------
+
+items: []
+
+# items:
+#   - title: Notes on the planted matching problem
+#     year: 2026
+#     description: Expository notes from a reading course.
+#     pdf: writings/planted-matching-notes.pdf
+#     url: https://example.com/optional-external-link

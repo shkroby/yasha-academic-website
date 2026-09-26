@@ -1,0 +1,14 @@
+{{- /* Tufte figure: image in the main column, caption in the margin.
+       Usage: {{< figure src="plot.png" alt="..." caption="..." >}}
+       Add fullwidth="true" to span the full page width. */ -}}
+{{- $src := .Get "src" -}}
+{{- with .Page.Resources.Get $src }}{{ $src = .RelPermalink }}{{ else }}{{ $src = $src | relURL }}{{ end -}}
+{{- $full := eq (.Get "fullwidth") "true" -}}
+{{- $id := printf "fig-%s" (substr (sha1 (printf "%v|%s" .Position $src)) 0 10) -}}
+<figure{{ if $full }} class="fullwidth"{{ end }}>
+  {{- with .Get "caption" }}
+  {{- if $full }}<figcaption>{{ . | $.Page.RenderString }}</figcaption>
+  {{- else }}<label for="{{ $id }}" class="margin-toggle" aria-label="Show caption">&#8853;</label><input type="checkbox" id="{{ $id }}" class="margin-toggle"><span class="marginnote">{{ . | $.Page.RenderString }}</span>{{ end }}
+  {{- end }}
+  <img src="{{ $src }}" alt="{{ .Get "alt" }}" loading="lazy">
+</figure>

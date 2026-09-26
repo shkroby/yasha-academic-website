@@ -1,0 +1,20 @@
+{{ define "bodyclass" }}tufte-page{{ end }}
+
+{{ define "main" }}
+<article class="tufte post">
+  <p class="post-back"><a href="{{ "blog/" | relURL }}">Blog</a></p>
+  <h1>{{ .Title }}</h1>
+  {{- with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
+  <p class="post-date"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time></p>
+  <section>
+    {{ .Content }}
+  </section>
+  <section class="post-footer">
+    <p>
+      {{- with .PrevInSection }}<a href="{{ .RelPermalink }}">Newer: {{ .Title }}</a>{{ end -}}
+      {{- with .NextInSection }}<a href="{{ .RelPermalink }}">Older: {{ .Title }}</a>{{ end -}}
+      <a href="{{ "blog/" | relURL }}">All posts</a>
+    </p>
+  </section>
+</article>
+{{ end }}

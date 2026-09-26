@@ -1,0 +1,32 @@
+{{- /* Expects dict "p" (paper map) and "page" (for RenderString). */ -}}
+{{- $p := .p }}{{ $page := .page }}
+<article class="entry">
+  <h4 class="entry-title">{{ $p.title }}</h4>
+  {{- $n := len ($p.coauthors | default slice) }}
+  <p class="entry-meta">
+    {{- if $n }}With {{ range $i, $a := $p.coauthors -}}
+      {{- if and (gt $n 2) (gt $i 0) }}, {{ end -}}
+      {{- if and (eq $i (sub $n 1)) (gt $n 1) }}{{ if eq $n 2 }} and {{ else }}and {{ end }}{{ end -}}
+      {{- with $a.url }}<a href="{{ . }}">{{ $a.name }}</a>{{ else }}{{ $a.name }}{{ end -}}
+    {{- end }}.{{ end }}
+    {{- if and (not $p.venue) $p.year }} {{ $p.year }}.{{ end -}}
+  </p>
+  {{- with $p.venue }}
+  <p class="entry-venue"><em>{{ . }}</em>{{ with $p.note }}, {{ . }}{{ end }}{{ with $p.year }}, {{ . }}{{ end }}.</p>
+  {{- else }}{{ with $p.note }}
+  <p class="entry-venue">{{ . }}</p>
+  {{- end }}{{ end }}
+  {{- if or $p.arxiv $p.pdf $p.url }}
+  <p class="entry-links">
+    {{- with $p.arxiv }}<a href="https://arxiv.org/abs/{{ . }}">arXiv<span class="ext" aria-hidden="true">↗</span></a><a href="https://arxiv.org/pdf/{{ . }}">PDF<span class="ext" aria-hidden="true">↗</span></a>{{ end -}}
+    {{- with $p.pdf }}<a href="{{ . | relURL }}">PDF<span class="ext" aria-hidden="true">↗</span></a>{{ end -}}
+    {{- with $p.url }}<a href="{{ . }}">Link<span class="ext" aria-hidden="true">↗</span></a>{{ end -}}
+  </p>
+  {{- end }}
+  {{- with $p.abstract }}
+  <details class="entry-abstract">
+    <summary>Abstract</summary>
+    <div class="abstract-body">{{ $page.RenderString (dict "display" "block") . }}</div>
+  </details>
+  {{- end }}
+</article>

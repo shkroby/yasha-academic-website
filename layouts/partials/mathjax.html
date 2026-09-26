@@ -1,0 +1,26 @@
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(', '\\)']],
+      displayMath: [['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      tags: 'ams',
+      macros: {
+        R: '{\\mathbb{R}}',
+        N: '{\\mathbb{N}}',
+        Z: '{\\mathbb{Z}}',
+        E: '{\\mathbb{E}}',
+        Prob: '{\\mathbb{P}}',
+        Var: '{\\operatorname{Var}}',
+        eps: '{\\varepsilon}',
+        norm: ['{\\left\\lVert #1 \\right\\rVert}', 1],
+        abs: ['{\\left\\lvert #1 \\right\\rvert}', 1],
+        ip: ['{\\left\\langle #1, #2 \\right\\rangle}', 2]
+      }
+    },
+    options: { ignoreHtmlClass: 'no-math' },
+    chtml: { matchFontHeight: true }
+  };
+</script>
+<script defer src="{{ site.Params.mathjax }}" id="MathJax-script"></script>

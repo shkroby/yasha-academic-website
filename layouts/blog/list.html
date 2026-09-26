@@ -1,0 +1,22 @@
+{{ define "bodyclass" }}tufte-page{{ end }}
+
+{{ define "main" }}
+<article class="tufte blog-index">
+  <h1 class="blog-title"><span class="marker">{{ .Title }}</span></h1>
+  {{- with .Description }}<p class="subtitle">{{ . }}</p>{{ end }}
+  <section>
+    {{- range .Pages.ByDate.Reverse }}
+    <div class="post-item">
+      <p class="post-date"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time></p>
+      <h2 class="post-link"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+      {{- with .Description }}<p class="post-summary">{{ . }}</p>{{ else }}<p class="post-summary">{{ .Summary | plainify | truncate 220 }}</p>{{ end }}
+    </div>
+    {{- else }}
+    <p>The first post is on its way.</p>
+    {{- end }}
+    {{- with .OutputFormats.Get "rss" }}
+    <p class="rss-link"><a href="{{ .RelPermalink }}">Subscribe via RSS</a></p>
+    {{- end }}
+  </section>
+</article>
+{{ end }}

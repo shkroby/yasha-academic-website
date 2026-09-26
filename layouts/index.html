@@ -1,0 +1,139 @@
+{{ define "bodyclass" }}home{{ end }}
+
+{{ define "main" }}
+{{- $page := . }}
+<section class="hero wrap" id="top" aria-labelledby="name">
+  <div class="hero-text">
+    <h1 id="name">{{ site.Title }}{{ with site.Params.altName }} <span class="alt-name" lang="ru">{{ . }}</span>{{ end }}</h1>
+    <div class="intro">{{ .Content }}</div>
+    <p class="hero-links">
+      {{- with site.Params.email }}<a href="mailto:{{ . }}">{{ . }}</a>{{ end -}}
+      {{- with site.Params.github }}<a href="{{ . }}">GitHub<span class="ext" aria-hidden="true">↗</span></a>{{ end -}}
+    </p>
+  </div>
+
+  {{- $portraits := slice }}
+  {{- range site.Params.portraits }}
+    {{- $portraits = $portraits | append (dict "src" (string (.src | relURL)) "alt" .alt) }}
+  {{- end }}
+  {{- with $portraits }}
+  <figure class="portrait">
+    <img id="portrait" width="600" height="750" alt="" decoding="async">
+    <script>
+      /* Pick one portrait uniformly at random on every page load. */
+      (function () {
+        var photos = {{ $portraits }};
+        var pick = photos[Math.floor(Math.random() * photos.length)];
+        var img = document.getElementById('portrait');
+        img.alt = pick.alt;
+        img.src = pick.src;
+      })();
+    </script>
+    <noscript><img src="{{ (index $portraits 0).src }}" width="600" height="750" alt="{{ (index $portraits 0).alt }}"></noscript>
+  </figure>
+  {{- end }}
+</section>
+
+{{- with site.Params.interests }}
+<section class="interests wrap" aria-labelledby="interests-label">
+  <h2 class="label" id="interests-label">Research interests</h2>
+  <ul class="interest-grid">
+    {{- range . }}
+    <li>
+      <span class="interest-title">{{ .title }}</span>
+      <span class="interest-detail">{{ .detail }}</span>
+    </li>
+    {{- end }}
+  </ul>
+</section>
+{{- end }}
+
+<section id="research" class="block wrap" aria-labelledby="research-title">
+  <h2 class="section-title" id="research-title">Research</h2>
+  <p class="jump-links">
+    <a href="#papers">Papers</a>
+    <a href="#working-papers">Working papers</a>
+  </p>
+
+  <h3 class="label group-label" id="papers">Papers</h3>
+  {{- range hugo.Data.papers.papers }}
+    {{ partial "paper.html" (dict "p" . "page" $page) }}
+  {{- end }}
+
+  <h3 class="label group-label" id="working-papers">Working papers</h3>
+  {{- range hugo.Data.papers.working }}
+    {{ partial "paper.html" (dict "p" . "page" $page) }}
+  {{- end }}
+</section>
+
+<section id="writings" class="block wrap" aria-labelledby="writings-title">
+  <h2 class="section-title" id="writings-title">Writings</h2>
+  {{- $items := hugo.Data.writings.items }}
+  {{- if $items }}
+    {{- range $items }}
+  <article class="entry">
+    <h4 class="entry-title">{{ .title }}</h4>
+    {{- if or .description .year }}
+    <p class="entry-meta">{{ with .description }}{{ . }} {{ end }}{{ with .year }}{{ . }}.{{ end }}</p>
+    {{- end }}
+    {{- if or .pdf .url }}
+    <p class="entry-links">
+      {{- with .pdf }}<a href="{{ . | relURL }}">PDF<span class="ext" aria-hidden="true">↗</span></a>{{ end -}}
+      {{- with .url }}<a href="{{ . }}">Link<span class="ext" aria-hidden="true">↗</span></a>{{ end -}}
+    </p>
+    {{- end }}
+  </article>
+    {{- end }}
+  {{- else }}
+  <p class="empty-note">Expository notes and other unpublished writing will be posted here.</p>
+  {{- end }}
+</section>
+
+<section id="about" class="block wrap" aria-labelledby="about-title">
+  <h2 class="section-title" id="about-title">About &amp; Contact</h2>
+  <div class="about-grid">
+    <div>
+      <h3 class="about-heading">Education</h3>
+      {{- range site.Params.education }}
+      <p class="about-line"><strong>{{ .degree }}</strong>, {{ .school }}, {{ .years }}</p>
+      {{- end }}
+      <p class="about-line"><a href="{{ site.Params.cv | relURL }}">Full CV (PDF)<span class="ext" aria-hidden="true">↗</span></a></p>
+    </div>
+    <div>
+      <h3 class="about-heading">Contact</h3>
+      <address>
+        {{- range site.Params.address }}{{ . }}<br>{{ end -}}
+      </address>
+      {{- with site.Params.email }}<p class="about-line"><a href="mailto:{{ . }}">{{ . }}</a></p>{{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+{{ define "scripts" }}
+<script>
+  /* Underline the nav item for the section currently in view. */
+  (function () {
+    if (!('IntersectionObserver' in window)) return;
+    var links = {};
+    document.querySelectorAll('.site-nav a[data-section]').forEach(function (a) {
+      links[a.getAttribute('data-section')] = a;
+    });
+    function clear() {
+      Object.keys(links).forEach(function (k) { links[k].classList.remove('is-active'); });
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        clear();
+        var link = links[entry.target.id];
+        if (link) link.classList.add('is-active');
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    ['top'].concat(Object.keys(links)).forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+  })();
+</script>
+{{ end }}
