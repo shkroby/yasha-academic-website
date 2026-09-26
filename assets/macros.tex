@@ -1,0 +1,294 @@
+% ===========================================================================
+% Math shortcuts, available in every formula on the site (blog posts and
+% paper abstracts). Write them exactly as in a LaTeX preamble:
+%
+%   \newcommand{\R}{\mathbb{R}}
+%   \newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+%   \DeclareMathOperator*{\argmax}{argmax}
+%
+% \renewcommand, \def, \DeclareMathOperator, \DeclarePairedDelimiter,
+% \definecolor, and \DeclareDocumentCommand (with m, o, and O{...}
+% arguments) also work. Later definitions override earlier ones.
+%
+% Only math belongs here: theorem environments, \ref shortcuts, sectioning,
+% and margin comments have no meaning inside a formula on the web. If a line
+% can't be used, the page still works and the browser's JavaScript console
+% says which line it was ("Math shortcut not loaded: ...").
+% ===========================================================================
+
+% ---- Compatibility, so preamble lines can be pasted in unchanged ----------
+\newcommand{\ensuremath}[1]{#1}          % everything here is already math
+\newcommand{\mathbbm}[1]{\mathbb{#1}}    % bbm package, for \mathbbm{1}
+\newcommand{\nc}{\newcommand}
+\newenvironment{displaymath}{}{}         % already display math inside $$...$$
+
+% ---- Colours for coauthor notes -------------------------------------------
+\definecolor{darkblue}{rgb}{0, 0, 0.55}
+\definecolor{darkgreen}{rgb}{0, 0.39, 0}
+\newcommand{\rh}[1]{{\color{darkblue}{#1}}}
+\newcommand{\js}[1]{{\color{darkgreen}{#1}}}
+\newcommand{\jl}[1]{{\color{purple}{#1}}}
+
+% ---- Delimiters and operators ---------------------------------------------
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator{\Hessian}{Hess}
+
+% ---- Displays -------------------------------------------------------------
+\newcommand{\bean}{\begin{eqnarray}}
+\newcommand{\eean}{\end{eqnarray}}
+\newcommand{\be}{\begin{displaymath}}
+\newcommand{\ee}{\end{displaymath}}
+\newcommand{\bea}{\begin{eqnarray*}}
+\newcommand{\eea}{\end{eqnarray*}}
+
+% ---- Divergences ----------------------------------------------------------
+\newcommand{\kl}[2]{\mathrm{KL}(#1 \| #2)}
+\newcommand*{\tv}[2]{\mathrm{TV}(#1, #2)}
+\newcommand*{\hel}[2]{\mathrm{d_{H^2}}(#1, #2)}
+\newcommand*{\chis}[2]{\chi^2(#1\| #2)}
+
+% #2 set over the relation #3 (the optional first argument is ignored here)
+\newcommand{\oset}[3][0ex]{\mathrel{\mathop{#3}\limits^{#2}}}
+
+% ---- Brackets -------------------------------------------------------------
+\newcommand{\brac}[1]{\left( #1 \right)}                  % brackets
+\newcommand{\sbrac}[1]{\left\{ #1 \right\}}               % set
+\newcommand{\abrac}[1]{\left\langle #1\right\rangle}      % angled
+
+% ---- Probabilistic modifiers ----------------------------------------------
+\newcommand{\lawof}{\mathscr{L}}
+\newcommand{\lawequals}{\overset{\operatorname{law}}{=}}
+\newcommand{\As}{\ensuremath{\text{a.s.}}}
+
+% ---- Common distributions -------------------------------------------------
+\newcommand{\Bernoulli}{\operatorname{Bern}}
+\newcommand{\Geom}{\operatorname{Geom}}
+\newcommand{\Exponential}{\operatorname{Exp}}
+\newcommand{\Binomial}{\operatorname{Bin}}
+\newcommand{\Poisson}{\operatorname{Pois}}
+\newcommand{\Normal}{\cN}
+\newcommand{\Unif}{\operatorname{Unif}}
+
+% ---- Basic probability ----------------------------------------------------
+\newcommand{\E}[1]{\mathbb{E}\left[#1\right]}                     % expectation
+\newcommand{\sE}[2]{\mathbb{E}_{#2}\left[#1\right]}               % expectation w/ sub
+\newcommand{\e}{{\mathbb E}}
+\newcommand{\Var}[1]{\mathbf{Var}\left(#1\right)}                 % variance
+\newcommand{\Cor}[2]{\mathbf{Cov}\left(#1,#2\right)}
+\newcommand{\Varsub}[2]{\mathbf{Var}_{#2}\left(#1\right)}         % variance w/ sub
+\newcommand{\Prob}[1]{\mathbb{P}\left(#1\right)}                  % probability
+\newcommand{\Psub}[2]{{\mathbb P}_{#1}\left(#2\right)}            % probability subscript
+\newcommand{\Psup}[2]{{\mathbf P}^{#1}\left\{#2\right\}}          % probability superscript
+\newcommand{\I}[1]{{\mathbf 1}_{#1}}                              % indicator
+\newcommand{\Cov}[2]{{\mathbf{Cov}}\left[#1, #2\right]}           % covariance
+\newcommand{\Ent}[1]{\textbf{Ent}\left(#1\right)}
+\newcommand{\Entsub}[2]{\mathbf{Ent}_{#2}\left(#1\right)}
+\newcommand{\mP}[2]{{\mathbb P}_{#2}\left\{#1\right\}}
+\newcommand{\mE}[2]{{\mathbb E}_{#2}\left[#1\right]}              % expectation (measure)
+\newcommand{\mV}[2]{{\mathbf{Var}}_{#2}\left\{#1\right\}}         % variance (measure)
+% \Cprob sizes the bracket on the term before conditioning; \probC after
+\newcommand{\Cprob}[2]{\mathbb{P}\set{\left. #1 \; \right| \; #2}}
+\newcommand{\probC}[2]{\mathbb{P}\left(#1 \; | \; #2\right)}
+\newcommand{\CondE}[2]{\mathbb{E}\left[ #1 \; | \; #2 \right]}
+\newcommand{\CondV}[2]{\mathbf{Var}\left( #1 \; | \; #2 \right)}
+\newcommand{\phat}[1]{\ensuremath{\hat{\mathbf P}}\left\{#1\right\}}
+\newcommand{\Ehat}[1]{\ensuremath{\hat{\mathbb E}}\left[#1\right]}
+\newcommand{\ehat}{\ensuremath{\hat{\mathbf E}}}
+\newcommand{\Esup}[2]{{\mathbb E^{#1}}\left\{#2\right\}}
+\newcommand{\esup}[1]{{\mathbf E^{#1}}}
+\newcommand{\Esub}[2]{{\mathbb E_{#1}}\left[#2\right]}
+\newcommand{\esub}[1]{{\mathbf E_{#1}}}
+\newcommand{\iid}{\text{i.i.d.}}
+\newcommand{\as}{\text{a.s.}}
+
+% ---- Convergence ----------------------------------------------------------
+\DeclareDocumentCommand{\Pwto} {o} {
+	\IfNoValueTF {#1}
+	{\overset{n\to\infty}{\longrightarrow}}
+	{ \xrightarrow[ #1 \to \infty]{\Pr }}
+}
+\DeclareDocumentCommand{\Prto} {o} {
+	\IfNoValueTF {#1}
+	{\overset{\Pr}{\longrightarrow}}
+	{ \xrightarrow[ #1 \to \infty]{\Pr }}
+}
+\DeclareDocumentCommand{\Asto} {o} {
+	\IfNoValueTF {#1}
+	{\overset{\operatorname{a.s.}}{\longrightarrow}}
+	{ \xrightarrow[ #1 \to \infty]{\operatorname{a.s.} }}
+}
+\DeclareDocumentCommand{\Mgfto} {o} {
+	\IfNoValueTF {#1}
+	{\overset{\operatorname{mgf}}{\longrightarrow}}
+	{ \xrightarrow[ #1 \to \infty]{\operatorname{mgf} }}
+}
+\DeclareDocumentCommand{\Wkto} {o} {
+	\IfNoValueTF {#1}
+	{\overset{(d)}{\longrightarrow}}
+	{ \xrightarrow[ #1 \to \infty]{(d) }}
+}
+\DeclareDocumentCommand \LPto { O{1} }
+{\overset{\operatorname{L^{#1}}}{\longrightarrow}}
+
+% restriction of the function #1 to #2
+\newcommand{\restr}[2]{{\left.#1\vphantom{\big|}\right|_{#2}}}
+
+% ---- Short names ----------------------------------------------------------
+\nc{\on}{\operatorname}
+\nc{\ch}{\mbox{ch}}
+\nc{\Z}{{\mathbb Z}}
+\nc{\C}{{\mathbb C}}
+\nc{\prob}{\mathbb{P}}
+\nc{\indic}{\mathbbm{1}}
+\nc{\indistr}{\overset{d}{\longrightarrow}}
+\nc{\inprob}{\overset{p}{\longrightarrow}}
+\nc{\N}{{\mathbb N}}
+\nc{\pone}{{\mathbb C}{\mathbb P}^1}
+\nc{\pa}{\partial}
+\nc{\F}{{\mathcal F}}
+\nc{\arr}{\rightarrow}
+\nc{\larr}{\longrightarrow}
+\nc{\al}{\alpha}
+\nc{\ri}{\rangle}
+\nc{\lef}{\langle}
+\nc{\W}{{\mathbb W}}
+\nc{\la}{\lambda}
+\nc{\lapl}{\mathcal{L}}
+\nc{\ep}{\lambda}
+\nc{\su}{\widehat{{\mathfrak s}{\mathfrak l}}_2}
+\nc{\sw}{{\mathfrak s}{\mathfrak l}}
+\nc{\g}{{\mathfrak g}}
+\nc{\h}{{\mathfrak h}}
+\nc{\n}{{\mathfrak n}}
+\nc{\G}{\widehat{\g}}
+\nc{\De}{\Delta}
+\nc{\gt}{\widetilde{\g}}
+\nc{\Ga}{\Gamma}
+\nc{\one}{{\mathbf 1}}
+\nc{\z}{{\mathfrak Z}}
+\nc{\La}{\Lambda}
+\nc{\wt}{\widetilde}
+\nc{\wh}{\widehat}
+\nc{\cri}{_{\kappa_c}}
+\nc{\sun}{\widehat{\sw}_N}
+\nc{\si}{\sigma}
+\nc{\el}{\ell}
+\nc{\om}{\omega}
+\nc{\ol}{\overline}
+\nc{\dzz}{\frac{dz}{z}}
+\nc{\mc}{\mathcal}
+\nc{\Cal}{\mathcal}
+\nc{\bb}{{\mathfrak b}}
+\nc{\ot}{\otimes}
+\nc{\R}{{\mathbb R}}
+\nc{\yy}{{\mc Y}}
+\nc{\ga}{\gamma}
+\nc{\us}{\underset}
+\nc{\opl}{\oplus}
+\nc{\Fq}{{\mathbb F}_q}
+\nc{\Mq}{{\mathcal M}}
+\nc{\Rep}{\on{Rep}}
+\nc{\lan}{\langle}
+\nc{\ran}{\rangle}
+\newcommand{\ind}{\mathbbm{1}}
+
+% ---- Calligraphic letters -------------------------------------------------
+\newcommand\cA{\mathcal A}
+\newcommand\cB{\mathcal B}
+\newcommand\cC{\mathcal C}
+\newcommand\cD{\mathcal D}
+\newcommand\cE{\mathcal E}
+\newcommand\cF{\mathcal F}
+\newcommand\cG{\mathcal G}
+\newcommand\cH{\mathcal H}
+\newcommand\cI{\mathcal I}
+\newcommand\cJ{\mathcal J}
+\newcommand\cK{\mathcal K}
+\newcommand\cL{{\mathcal L}}
+\newcommand\cM{\mathcal M}
+\newcommand\cN{\mathcal N}
+\newcommand\cO{\mathcal O}
+\newcommand\cP{\mathcal P}
+\newcommand\cQ{\mathcal Q}
+\newcommand\cR{{\mathcal R}}
+\newcommand\cS{{\mathcal S}}
+\newcommand\cT{{\mathcal T}}
+\newcommand\cU{{\mathcal U}}
+\newcommand\cV{\mathcal V}
+\newcommand\cW{\mathcal W}
+\newcommand\cX{{\mathcal X}}
+\newcommand\cY{{\mathcal Y}}
+\newcommand\cZ{{\mathcal Z}}
+
+% ---- More short names -----------------------------------------------------
+\nc{\D}{\mathcal D}
+\nc{\Vect}{\on{Vect}}
+\nc{\ghat}{\G}
+\nc{\T}{\mc T}
+\nc{\Tloc}{\T^\g_{\on{loc}}}
+\nc{\vac}{|0\ran}
+\nc{\Wick}{{\mb :}}
+\nc{\mb}{\mathbf}
+\nc{\delz}{\partial_z}
+\nc{\K}{{\cali K}}
+\nc{\cali}{\mathcal}
+\nc{\li}{\mathfrak l}
+\nc{\lt}{\widetilde{\li}}
+\nc{\astar}{a^*}
+\nc{\ka}{\kappa}
+
+\nc{\OO}{{\mc O}}
+\nc{\AutO}{\on{Aut}\OO}
+\nc{\DerO}{\on{Der}\OO}
+\nc{\DerpO}{\on{Der}_+\OO}
+\nc{\Au}{{\mc A}ut}
+\nc{\mf}{\mathfrak}
+\nc{\V}{{\mc V}}
+\nc{\hh}{\wh{\h}}
+
+\nc{\pp}{{\mathfrak p}}
+\nc{\mm}{{\mathfrak m}}
+\nc{\rr}{{\mathfrak r}}
+\nc{\gr}{\on{gr}}
+\nc{\Spe}{\on{Spec}}
+\nc{\rv}{\rho^\vee}
+\nc{\can}{\on{can}}
+\nc{\CC}{\on{Op}_G(D))}
+\nc{\Op}{\on{Op}_G(D)}
+\nc{\MOp}{\on{MOp}_G(D)}
+\nc{\Db}{{\mathbb D}}
+\nc{\ww}{w}
+
+\nc{\oQl}{\ol{{\mathbb Q}}_\ell}
+\nc{\oFq}{\ol{{\mathbb F}}_q}
+\nc{\Q}{{\mathbb Q}}
+\nc{\Ql}{{\mathbb Q}_\ell}
+\nc{\bs}{\backslash}
+\nc{\AD}{{\mathbb A}}
+\nc{\M}{{\mc M}}
+\nc{\Bun}{\on{Bun}}
+\nc{\hl}{h^{\leftarrow}}
+\nc{\hr}{h^{\rightarrow}}
+\nc{\supp}{\on{supp}}
+\nc{\He}{\on{H}}
+\nc{\Aut}{\on{Aut}}
+\nc{\Ll}{{\mc L}}
+\nc{\Coh}{{{\mathcal C}oh}}
+\nc{\ovc}{\overset{\circ}}
+\nc{\Hav}{\on{H}}
+\nc{\Mod}{\on{Mod}}
+\nc{\kk}{{\mathfrak k}}
+\nc{\vf}{\varphi}
+\nc{\Gr}{\on{Gr}}
+\nc{\gen}{\on{gen}}
+\nc{\IC}{\on{IC}}
+\nc{\Jac}{\on{Jac}}
+
+% ---- Used on this site before the list above was added --------------------
+\newcommand{\eps}{\varepsilon}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\ip}[2]{\left\langle #1, #2 \right\rangle}

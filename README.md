@@ -14,6 +14,7 @@ publishes the site through GitHub Actions (`.github/workflows/hugo.yml`).
 | Papers and working papers | `data/papers.yaml` |
 | Writings (expository notes, etc.) | `data/writings.yaml`, PDFs in `static/writings/` |
 | Shelf (favorite quotes, books, websites, people) | `data/shelf.yaml` (page subtitle: `content/shelf/_index.md`) |
+| Math shortcuts (`\newcommand`, etc.) | `assets/macros.tex` |
 | CV | replace `static/cv.pdf` |
 | Profile photos (one is picked at random per visit) | `static/images/`, listed in `hugo.yaml` under `portraits` |
 | Colors and layout | `assets/css/main.css` (blog: `assets/css/tufte.css`) |
@@ -30,8 +31,9 @@ and put the images next to `index.md`.
 
 LaTeX works as in a paper: `$...$` inline, `$$...$$` for display, and
 environments like `align` and `equation` (numbered, citable with `\eqref`).
-Use `\$` for a literal dollar sign. Custom macros live in
-`layouts/partials/mathjax.html`.
+Use `\$` for a literal dollar sign. Math shortcuts live in
+`assets/macros.tex`, written as in a LaTeX preamble (`\newcommand`,
+`\DeclareMathOperator`, ...); they work in every formula on the site.
 
 Tufte features, via shortcodes:
 

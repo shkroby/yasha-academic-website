@@ -1,26 +1,125 @@
+{{- /* MathJax setup. The math shortcuts themselves live in assets/macros.tex. */ -}}
+{{- $macros := "" }}
+{{- with resources.Get "macros.tex" }}{{ $macros = .Content }}{{ end }}
 <script>
-  window.MathJax = {
-    tex: {
-      inlineMath: [['\\(', '\\)']],
-      displayMath: [['\\[', '\\]']],
-      processEscapes: true,
-      processEnvironments: true,
-      tags: 'ams',
-      macros: {
-        R: '{\\mathbb{R}}',
-        N: '{\\mathbb{N}}',
-        Z: '{\\mathbb{Z}}',
-        E: '{\\mathbb{E}}',
-        Prob: '{\\mathbb{P}}',
-        Var: '{\\operatorname{Var}}',
-        eps: '{\\varepsilon}',
-        norm: ['{\\left\\lVert #1 \\right\\rVert}', 1],
-        abs: ['{\\left\\lvert #1 \\right\\rvert}', 1],
-        ip: ['{\\left\\langle #1, #2 \\right\\rangle}', 2]
+  (function () {
+    var NO_VALUE = '-NoValue-';   /* what xparse passes for a missing optional argument */
+
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams',
+        packages: { '[+]': ['novalue'] }
+      },
+      options: { ignoreHtmlClass: 'no-math' },
+      chtml: { matchFontHeight: true },
+      startup: {
+        ready: function () {
+          defineNoValue();
+          MathJax.startup.defaultReady();
+          loadShortcuts({{ $macros }});   /* before the page is typeset */
+        }
       }
-    },
-    options: { ignoreHtmlClass: 'no-math' },
-    chtml: { matchFontHeight: true }
-  };
+    };
+
+    /* \IfNoValueTF and friends, used by shortcuts written with \DeclareDocumentCommand. */
+    function defineNoValue() {
+      var tex = MathJax._.input.tex;
+      var ParseUtil = tex.ParseUtil.default;
+      new tex.SymbolMap.CommandMap('novalue', {
+        IfNoValueTF: ['IfNoValue', true, true, false],
+        IfNoValueT: ['IfNoValue', true, false, false],
+        IfNoValueF: ['IfNoValue', false, true, false],
+        IfValueTF: ['IfNoValue', true, true, true],
+        IfValueT: ['IfNoValue', true, false, true],
+        IfValueF: ['IfNoValue', false, true, true]
+      }, {
+        IfNoValue: function (parser, name, hasTrue, hasFalse, negate) {
+          var noValue = parser.GetArgument(name).trim() === NO_VALUE;
+          var test = negate ? !noValue : noValue;
+          var yes = hasTrue ? parser.GetArgument(name) : '';
+          var no = hasFalse ? parser.GetArgument(name) : '';
+          parser.string = ParseUtil.addArgs(parser, test ? yes : no, parser.string.slice(parser.i));
+          parser.i = 0;
+          ParseUtil.checkMaxMacros(parser);
+        }
+      });
+      tex.Configuration.Configuration.create('novalue', { handler: { macro: ['novalue'] } });
+    }
+
+    /* Define the shortcuts one statement at a time, so a line MathJax can't
+       use is reported in the console instead of taking the rest down with it. */
+    function loadShortcuts(source) {
+      var text = source
+        .replace(/(^|[^\\])%.*$/gm, '$1')                       /* comments */
+        .replace(/\\(re)?newcommand\s*\*/g, '\\$1newcommand')    /* \newcommand* */
+        .replace(/\\providecommand\s*\*?/g, '\\newcommand');
+      statements(translateDocumentCommands(text)).forEach(function (s) {
+        var out;
+        try { out = MathJax.tex2mml(s); } catch (e) { out = '<merror data-mjx-error="' + e.message + '">'; }
+        if (/<(merror|mi|mo|mn|mtext|ms)\b/.test(out)) {   /* a definition renders nothing */
+          var err = out.match(/data-mjx-error="([^"]*)"/);
+          console.warn('Math shortcut not loaded' + (err ? ' (' + err[1] + ')' : '') + ':\n' + s);
+        }
+      });
+    }
+
+    /* Split into top-level statements: a line break ends one unless braces
+       are still open or the next line continues it with { or [. */
+    function statements(text) {
+      var out = [], depth = 0, start = 0;
+      for (var i = 0; i < text.length; i++) {
+        var c = text[i];
+        if (c === '\\') i++;
+        else if (c === '{') depth++;
+        else if (c === '}') depth--;
+        else if (c === '\n' && depth <= 0 && !/^\s*[{\[]/.test(text.slice(i + 1))) {
+          out.push(text.slice(start, i));
+          start = i + 1;
+        }
+      }
+      out.push(text.slice(start));
+      return out.map(function (s) { return s.trim(); }).filter(Boolean);
+    }
+
+    /* \DeclareDocumentCommand{\name}{o m}{body} becomes
+       \newcommand{\name}[2][-NoValue-]{body}. Handles argument specs made of
+       m's, optionally preceded by o or O{default}. */
+    function translateDocumentCommands(text) {
+      var re = /\\(?:Declare|New|Renew|Provide)DocumentCommand/g, m;
+      while ((m = re.exec(text))) {
+        var name = readGroup(text, re.lastIndex);
+        var spec = name && readGroup(text, name.end);
+        var body = spec && readGroup(text, spec.end);
+        var args = spec && spec.inner.match(/^\s*(?:(o)|O\s*\{([^{}]*)\})?((?:\s*m)*)\s*$/);
+        if (!body || !args) continue;   /* unsupported spec: left for MathJax to report */
+        var optional = args[1] ? NO_VALUE : args[2];
+        var n = (optional === undefined ? 0 : 1) + (args[3].match(/m/g) || []).length;
+        var def = '\\newcommand{' + name.inner + '}' + (n ? '[' + n + ']' : '') +
+          (optional === undefined ? '' : '[' + optional + ']') + '{' + body.inner + '}';
+        text = text.slice(0, m.index) + def + text.slice(body.end);
+        re.lastIndex = m.index + def.length;
+      }
+      return text;
+    }
+
+    /* Read a {group} or a bare \controlsequence starting at i (after spaces). */
+    function readGroup(text, i) {
+      while (/\s/.test(text[i])) i++;
+      if (text[i] !== '{') {
+        var cs = text.slice(i).match(/^\\([a-zA-Z@]+|.)/);
+        return cs && { inner: cs[0], end: i + cs[0].length };
+      }
+      for (var depth = 0, j = i; j < text.length; j++) {
+        if (text[j] === '\\') j++;
+        else if (text[j] === '{') depth++;
+        else if (text[j] === '}' && --depth === 0) return { inner: text.slice(i + 1, j), end: j + 1 };
+      }
+      return null;
+    }
+  })();
 </script>
 <script defer src="{{ site.Params.mathjax }}" id="MathJax-script"></script>

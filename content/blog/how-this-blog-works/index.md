@@ -71,4 +71,4 @@ def sliced_wasserstein(X, Y, n_proj=500, p=2, seed=0):
 | Opening quotation | `{{</* epigraph author="…" */>}}…{{</* /epigraph */>}}` |
 | A literal dollar sign | `\$` |
 
-Shortcuts such as `\R`, `\E`, `\norm{x}`, and `\ip{x}{y}` are predefined in `layouts/partials/mathjax.html`; add your own there.
+Shortcuts such as `\R`, `\E{X}`, `\norm{x}`, and `\ip{x}{y}` are defined in `assets/macros.tex`, written just as in a LaTeX preamble; add your own there.
