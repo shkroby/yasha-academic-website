@@ -1,0 +1,31 @@
+# One-time helper: replaces the old template with the contents of
+# site-bundle.tar.gz, then removes the bundle. Safe to delete afterwards.
+name: Unpack site bundle (one-time)
+
+on:
+  push:
+    paths: ["site-bundle.tar.gz"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  unpack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Replace site files with the bundle
+        run: |
+          set -euo pipefail
+          if [ ! -f site-bundle.tar.gz ]; then echo "No bundle found; nothing to do."; exit 0; fi
+          mkdir -p "$RUNNER_TEMP/bundle"
+          tar -xzf site-bundle.tar.gz -C "$RUNNER_TEMP/bundle"
+          # Remove every tracked file except the workflows, then drop in the new site.
+          git ls-files -z -- . ':(exclude).github' | xargs -0 git rm -q --
+          cp -a "$RUNNER_TEMP/bundle/." .
+          git add -A
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -m "Replace old template with the new Hugo site"
+          git push
