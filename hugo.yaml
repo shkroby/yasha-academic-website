@@ -14,7 +14,7 @@ params:
   description: >-
     Jacob Shkrob is a PhD student in mathematics at NYU Courant working on
     high-dimensional probability, combinatorics, and statistics.
-  altName: "Яша"          # shown in lighter type next to your name
+  altName: "Яша Шкроб"    # shown in lighter type next to your name
   email: jas10184@nyu.edu
   cv: cv.pdf              # file lives in static/cv.pdf
   github: https://github.com/jshkrob

@@ -194,6 +194,7 @@ summary:focus-visible {
   letter-spacing: 0;
   color: var(--muted);
   margin-left: 10px;
+  white-space: nowrap;    /* wrap the Russian name as one unit */
 }
 
 .intro p { margin: 0 0 16px; }

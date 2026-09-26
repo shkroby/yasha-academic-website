@@ -12,9 +12,9 @@
     {{- if and (not $p.venue) $p.year }} {{ $p.year }}.{{ end -}}
   </p>
   {{- with $p.venue }}
-  <p class="entry-venue"><em>{{ . }}</em>{{ with $p.note }}, {{ . }}{{ end }}{{ with $p.year }}, {{ . }}{{ end }}.</p>
+  <p class="entry-venue"><em>{{ . }}</em>{{ with $p.note }}, {{ $page.RenderString . }}{{ end }}{{ with $p.year }}, {{ . }}{{ end }}.</p>
   {{- else }}{{ with $p.note }}
-  <p class="entry-venue">{{ . }}</p>
+  <p class="entry-venue">{{ $page.RenderString . }}</p>
   {{- end }}{{ end }}
   {{- if or $p.arxiv $p.pdf $p.url }}
   <p class="entry-links">

@@ -3,13 +3,14 @@
 # Entries appear in the order written here (newest first).
 #
 # Fields (all optional except title):
-#   title, year, venue (italicised), note, arxiv (id only), pdf, url,
+#   title, year, venue (italicised), note (Markdown), arxiv (id only), pdf, url,
 #   coauthors (list of {name, url}), abstract (Markdown + LaTeX with $...$)
 # ---------------------------------------------------------------------------
 
 papers:
   - title: Nearly sharp comparison results for sliced and max-sliced Wasserstein distances
     year: 2026
+    note: "Under submission at the *Annales de l'Institut Henri Poincaré*."
     arxiv: "2608.13374"
     coauthors:
       - name: Jonathan Niles-Weed
@@ -34,6 +35,7 @@ papers:
 
   - title: An empirical Bayes perspective on heteroskedastic mean estimation
     year: 2026
+    note: "Accepted to *COLT 2026*."
     arxiv: "2603.13499"
     coauthors:
       - name: Yanjun Han
