@@ -12,8 +12,8 @@
   {{- with .Content }}<section>{{ . }}</section>{{ end }}
 
   {{- if gt (len $sections) 1 }}
-  <nav class="shelf-jump" aria-label="Shelf sections">
-    {{- range $sections }}<a href="#{{ .title | anchorize }}">{{ .title }}</a>{{ end -}}
+  <nav class="shelf-tabs" aria-label="Shelf sections">
+    {{- range $sections }}{{ $id := .title | anchorize }}<a href="#{{ $id }}" data-tab="{{ $id }}">{{ .title }}</a>{{ end -}}
   </nav>
   {{- end }}
 
@@ -46,4 +46,40 @@
   </section>
   {{- end }}
 </article>
+{{ end }}
+
+{{ define "scripts" }}
+<script>
+  /* Show one Shelf section at a time, picked by the tabs. The URL hash
+     (e.g. /shelf/#poems) selects a tab, so each one can be linked to.
+     Without JavaScript, every section shows and the tabs are jump links. */
+  (function () {
+    var tabs = document.querySelectorAll('.shelf-tabs a[data-tab]');
+    if (!tabs.length) return;
+    document.querySelector('.shelf').classList.add('has-tabs');
+
+    function show(id) {
+      var ids = Array.prototype.map.call(tabs, function (a) { return a.dataset.tab; });
+      if (ids.indexOf(id) < 0) id = ids[0];
+      tabs.forEach(function (a) {
+        var on = a.dataset.tab === id;
+        if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+        document.getElementById(a.dataset.tab).hidden = !on;
+      });
+      return id;
+    }
+    function fromHash() {
+      try { return decodeURIComponent(location.hash.slice(1)); } catch (e) { return ''; }
+    }
+
+    tabs.forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        history.replaceState(null, '', '#' + show(a.dataset.tab));
+      });
+    });
+    window.addEventListener('hashchange', function () { show(fromHash()); });
+    show(fromHash());
+  })();
+</script>
 {{ end }}

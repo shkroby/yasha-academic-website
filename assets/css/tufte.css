@@ -308,7 +308,7 @@ html { font-size: 15px; }
 
 /* ---- Shelf ------------------------------------------------------------ */
 
-.tufte .shelf-jump {
+.tufte .shelf-tabs {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem 1.6rem;
@@ -318,6 +318,36 @@ html { font-size: 15px; }
   font-variant: small-caps;
   letter-spacing: 0.04em;
   text-transform: lowercase;
+}
+/* The selected tab gets the same highlighter swipe as the Blog/Shelf tabs. */
+.tufte .shelf-tabs a[aria-current] {
+  position: relative;
+  isolation: isolate;
+  color: var(--ink);
+  text-decoration: none;
+}
+.tufte .shelf-tabs a[aria-current]::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -0.3em;
+  right: -0.35em;
+  top: 0.35em;
+  bottom: 0;
+  background: var(--marker);
+  border-radius: 0.1em 0.35em 0.15em 0.4em / 0.25em 0.15em 0.35em 0.1em;
+  transform: rotate(-3deg) skewX(-12deg);
+  transform-origin: left center;
+  animation: marker-swipe 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+/* With tabs, the tab names the section, so its heading is only for screen readers. */
+.tufte.has-tabs .shelf-section > h2 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 .tufte .shelf-section h2 { margin-bottom: 1rem; }
 .tufte section > blockquote.shelf-quote {
