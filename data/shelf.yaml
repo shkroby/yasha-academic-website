@@ -10,6 +10,8 @@
 #   - quote: "The quotation itself."
 #     by: Who said it
 #     source: Where it's from        (shown in italics)
+#   For verse, write `quote: |-` and end each line but the last with a
+#   backslash (\) to keep the line breaks.
 #
 # Anything else (a book, website, person, ...):
 #   - title: The Brothers Karamazov
@@ -40,6 +42,12 @@ sections:
           my feet.
         by: Sylvia Plath
         source: The Bell Jar
+      - quote: |-
+          Do I contradict myself?\
+          Very well then I contradict myself,\
+          (I am large, I contain multitudes.)
+        by: Walt Whitman
+        source: Song of Myself, 51
 
   - title: Poems
     items:
