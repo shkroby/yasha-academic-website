@@ -41,6 +41,7 @@ papers:
       - name: Yanjun Han
         url: https://yanjunhan2021.github.io/
       - name: Abhishek Shetty
+        url: https://ashettyv.github.io/
     abstract: >-
       Towards understanding the fundamental limits of estimation from data of
       varied quality, we study the problem of estimating a mean parameter from
@@ -95,12 +96,13 @@ papers:
       physicians from the MIMIC-III dataset.
 
 working:
-  - title: Vector balancing with permutations
+  - title: An optimal constant for vector balancing with permutations
     note: In preparation.
     coauthors:
       - name: Jonathan Niles-Weed
         url: https://www.jonathannilesweed.com/
-      - name: S. Sadovsky
+      - name: Shay Sadovsky
+        url: https://sites.google.com/view/shaysadovsky/home
 
   - title: Bayes-optimal estimation for Gaussian planted matchings
     note: In preparation.
