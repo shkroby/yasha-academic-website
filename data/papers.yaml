@@ -8,6 +8,21 @@
 # ---------------------------------------------------------------------------
 
 papers:
+  - title: An optimal constant for vector balancing with permutations
+    year: 2026
+    arxiv: "2610.02127"
+    coauthors:
+      - name: Jonathan Niles-Weed
+        url: https://www.jonathannilesweed.com/
+      - name: Shay Sadovsky
+        url: https://sites.google.com/view/shaysadovsky/home
+    abstract: >-
+      We present a version of the vector balancing problem in which each vector
+      may be given a sign and a permutation of its coordinates. We prove that
+      this vector balancing problem and its corresponding prefix problem admit
+      an explicit bound, and we further show that it is asymptotically optimal
+      in the dimension. Our method of proof is purely geometric.
+
   - title: Nearly sharp comparison results for sliced and max-sliced Wasserstein distances
     year: 2026
     note: "Under submission at the *Annales de l'Institut Henri Poincaré*."
@@ -96,14 +111,6 @@ papers:
       physicians from the MIMIC-III dataset.
 
 working:
-  - title: An optimal constant for vector balancing with permutations
-    note: In preparation.
-    coauthors:
-      - name: Jonathan Niles-Weed
-        url: https://www.jonathannilesweed.com/
-      - name: Shay Sadovsky
-        url: https://sites.google.com/view/shaysadovsky/home
-
   - title: Bayes-optimal estimation for Gaussian planted matchings
     note: In preparation.
     coauthors:
